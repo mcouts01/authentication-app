@@ -1,0 +1,9 @@
+<div class="profile-container" *ngIf="userProfile$ | async as userInfo">
+    <div class="profile-header">
+        <h3>Profile</h3>
+    </div>
+    <p class="category">Email:</p>
+    <p class="data">{{ userInfo.user.email }}</p>
+    <p class="category">FirstName:</p>
+    <p class="data">{{ userInfo.profile.firstName }}</p>
+</div>

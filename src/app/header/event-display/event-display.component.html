@@ -1,0 +1,5 @@
+<div class="event-container" *ngIf="events$ | async as events">
+    <select class="input">
+        <option *ngFor="let event of events">{{ event.title }}</option>
+    </select>
+</div>

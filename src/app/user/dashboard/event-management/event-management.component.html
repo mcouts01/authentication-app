@@ -1,0 +1,23 @@
+<div class="form-container">
+    <form [formGroup]="form">
+        <div>
+            <label>Title:</label>
+            <input class="input" type="text" formControlName="title">
+        </div>
+        <div>
+            <label>Description</label>
+            <input class="input" type="text" formControlName="description">
+        </div>
+        <div>
+            <label>Start date:</label>
+            <input class="input" type="date" formControlName="start">
+        </div>
+        <div>
+            <label>End date:</label>
+            <input class="input" type="date" formControlName="end">
+        </div>
+    </form>
+    <div>
+        <button class="btn" (click)="submit()">Submit</button>
+    </div>
+</div>

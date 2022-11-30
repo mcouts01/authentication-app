@@ -1,0 +1,25 @@
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    height: 60px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    .event-display-container {
+        grid-column: 2;
+        justify-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .auth-button-container {
+        grid-column: 3;
+        justify-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
