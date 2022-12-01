@@ -31,11 +31,13 @@ export class EventDisplayComponent implements OnInit {
 
     this.events$ = this.eventService.getUpcomingEvents();
 
-    this.route.params.pipe(
-      switchMap(params => this.eventService.getEventByID(params['eventID'])),
-    ).subscribe(e => {
-      this.form.patchValue({ event: e })
-    });
+    if(this.route.snapshot.params['eventId'] != null) {
+      this.route.params.pipe(
+        switchMap(params => this.eventService.getEventByID(params['eventID'])),
+      ).subscribe(e => {
+        this.form.patchValue({ event: e })
+      });
+    }
 
     this.form.get('event')?.valueChanges.pipe(
       tap(console.log)

@@ -6,7 +6,7 @@ import { EventService } from "../../event.service";
 import { UserService } from "../user.service";
 
 export interface Event {
-    id: number;
+    eventID: number;
     start: Date;
     end: Date;
     title: string;

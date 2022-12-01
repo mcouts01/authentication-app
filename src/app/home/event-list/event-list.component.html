@@ -6,5 +6,9 @@
         <p>{{ event.start }}</p>
         <p><strong>End</strong></p>
         <p>{{ event.end }}</p>
+        <p>{{ event.eventID }}</p>
+        <div>
+            <button [routerLink]="['/event', event.eventID, 'dashboard']">Select Event</button>
+        </div>
     </div>
 </div>
