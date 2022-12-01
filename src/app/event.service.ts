@@ -19,4 +19,8 @@ export class EventService {
   createEvent(event: FormGroup): Observable<Event> {
     return this.http.post<Event>(encodeURI(`${this.api}/event/`), event.value);
   }
+
+  getEventByID(eventID: number): Observable<Event> {
+    return this.http.get<Event>(encodeURI(`${this.api}/event/get/${eventID}`));
+  }
 }

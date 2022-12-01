@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { catchError, combineLatest, filter, map, Observable, share, switchMap, tap, throwError, TimeoutError } from 'rxjs';
 import { EventService } from '../../event.service';
+import { UserService } from '../user.service';
 import { DashboardStore } from './dashboard.store';
-import { UserService } from './user-profile/user-profile.service';
+import { UserProfileService } from './user-profile/user-profile.service';
 import { UserModel } from './user-profile/user.model';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [DashboardStore]
+  providers: [ DashboardStore ]
 })
 export class DashboardComponent implements OnInit {
+  @Input('selectedEvent') selectedEvent!: number;
+
   userProfile$!: Observable<{
     user: User,
     profile: UserModel
@@ -23,11 +26,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private readonly dashboardStore: DashboardStore,
-    private readonly eventService: EventService,
     public auth: AuthService,
-    private readonly userService: UserService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly userProfileService: UserProfileService,
+    private readonly userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -39,12 +40,14 @@ export class DashboardComponent implements OnInit {
     this.userProfile$ = combineLatest({
       user: sharedUser$,
       profile: sharedUser$.pipe(
-        switchMap(user => this.userService.getUserProfile(user?.sub)),
+        switchMap(user => this.userProfileService.getUserProfile(user?.sub)),
         catchError((error) => {
           return throwError(() => error);
         })
       )
     });
+
+    this.dashboardStore.getSelectedEvent(null);
   }
 
 }

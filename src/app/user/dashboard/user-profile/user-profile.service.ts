@@ -6,7 +6,7 @@ import { UserModel } from "./user.model";
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class UserProfileService {
     private lastProfile: { id: string | null | undefined, profile$: Observable<UserModel>} | null = null;
     readonly api = "http://localhost:8080";
 

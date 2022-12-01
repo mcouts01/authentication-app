@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { tap } from 'rxjs';
-import { DashboardStore } from 'src/app/user/dashboard/dashboard.store';
+import { first, Observable, switchMap, tap } from 'rxjs';
+import { DashboardStore, Event } from 'src/app/user/dashboard/dashboard.store';
 import { EventService } from 'src/app/event.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-display',
@@ -12,19 +14,31 @@ import { EventService } from 'src/app/event.service';
 })
 export class EventDisplayComponent implements OnInit {
 
-  events$ = this.dashboardStore.events$;
+  events$!: Observable<Event[]>;
+
+  form!: FormGroup;
 
   constructor(
-    private readonly dashboardStore: DashboardStore,
     private readonly eventService: EventService,
-    public auth: AuthService
+    public auth: AuthService,
+    private readonly route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.eventService.getUpcomingEvents().pipe(
-      tap((events) => {
-        this.dashboardStore.updateEvents(events);
-      })
+    this.form = new FormGroup({
+      event: new FormControl(null)
+    });
+
+    this.events$ = this.eventService.getUpcomingEvents();
+
+    this.route.params.pipe(
+      switchMap(params => this.eventService.getEventByID(params['eventID'])),
+    ).subscribe(e => {
+      this.form.patchValue({ event: e })
+    });
+
+    this.form.get('event')?.valueChanges.pipe(
+      tap(console.log)
     ).subscribe();
   }
 }

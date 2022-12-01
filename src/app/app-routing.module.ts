@@ -5,14 +5,26 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { UserProfileComponent } from './user/dashboard/user-profile/user-profile.component';
 import { RegisteredGuard } from './registered.guard';
 import { UserComponent } from './user/user.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: 'user', component: UserComponent,
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full'
+  },
+  { path: 'event/:eventId', component: UserComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
       { path: 'registration', component: RegistrationComponent },
     ]
   },
+  { path: 'event/', component: UserComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
+    ]
+  },
+  {
+    path: 'home', component: HomeComponent
+  }
 ];
 
 @NgModule({

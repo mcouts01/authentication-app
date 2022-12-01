@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } fro
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
-import { UserService } from './user/dashboard/user-profile/user-profile.service';
+import { UserProfileService } from './user/dashboard/user-profile/user-profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class RegisteredGuard implements CanActivate {
   constructor(
     private readonly auth: AuthService,
     private readonly router: Router,
-    private readonly userService: UserService
+    private readonly userService: UserProfileService
     ) {
   }
   canActivate(

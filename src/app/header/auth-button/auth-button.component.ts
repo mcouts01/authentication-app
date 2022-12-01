@@ -22,12 +22,5 @@ export class AuthButtonComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth.isAuthenticated$.pipe(
-      tap(
-        (isAuthenticated) => isAuthenticated ? this.router.navigateByUrl('user/dashboard') : this.router.navigateByUrl('/')
-      )
-    ).subscribe();
-
-
   }
 }

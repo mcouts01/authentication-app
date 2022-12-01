@@ -2,7 +2,7 @@
     <button class="btn" (click)="auth.logout({ returnTo: document.location.origin })">
         Log out
     </button>
-    <button class="btn" routerLink="user/dashboard">Dashboard</button>
+    <button class="btn" [routerLink]="['event', 1, 'dashboard']">Dashboard</button>
 </ng-container>
 
 <ng-template #loggedOut>

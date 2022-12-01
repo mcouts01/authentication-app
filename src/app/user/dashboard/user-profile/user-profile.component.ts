@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { catchError, combineLatest, filter, Observable, share, switchMap, tap, throwError } from 'rxjs';
-import { UserService } from './user-profile.service';
+import { UserProfileService } from './user-profile.service';
 import { UserModel } from './user.model';
 
 @Component({
@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private readonly userService: UserService,
+    private readonly userService: UserProfileService,
     private readonly router: Router
   ) { 
   }
