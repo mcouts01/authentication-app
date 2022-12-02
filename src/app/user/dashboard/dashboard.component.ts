@@ -14,7 +14,6 @@ import { UserModel } from './user-profile/user.model';
   providers: [ DashboardStore ]
 })
 export class DashboardComponent implements OnInit {
-  @Input('selectedEvent') selectedEvent!: number;
 
   userProfile$!: Observable<{
     user: User,
