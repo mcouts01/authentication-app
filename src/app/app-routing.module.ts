@@ -17,11 +17,7 @@ const routes: Routes = [
       { path: 'registration', component: RegistrationComponent },
     ]
   },
-  { path: 'event/', component: UserComponent,
-    children: [
-      { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
-    ]
-  },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
   {
     path: 'home', component: HomeComponent
   }

@@ -2,9 +2,12 @@
     <div class="dashboard-header">
         <h1>Hello, {{ user.profile.firstName }}</h1>
     </div>
-    <div *ngIf="selectedEvent$ | async as selectedEvent">
+    <div *ngIf="selectedEvent$ | async as selectedEvent; else noevent">
         <h3>You are viewing data for {{ selectedEvent.title }}</h3>
     </div>
+    <ng-template #noevent>
+        <h3>You are not viewing any event data</h3>
+    </ng-template>
     <div class="dashboard-content">
         <div class="user-profile-container dashboard-tile">
             <app-user-profile></app-user-profile>
