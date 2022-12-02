@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Event } from './user/dashboard/dashboard.store';
 
 @Injectable({
@@ -10,7 +10,15 @@ import { Event } from './user/dashboard/dashboard.store';
 export class EventService {
   readonly api = "http://localhost:8080";
 
-  constructor(private readonly http: HttpClient) {}
+  private eventSelectedSource = new Subject<Event>();
+
+  eventSelected$ = this.eventSelectedSource.asObservable();
+
+  constructor(private readonly http: HttpClient) { }
+
+  setEvent(event: Event) {
+    this.eventSelectedSource.next(event);
+  }
 
   getUpcomingEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(encodeURI(`${this.api}/event/upcoming`));

@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
-  { path: 'event/:eventId', component: UserComponent,
+  { path: 'event/:eventID', component: UserComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
       { path: 'registration', component: RegistrationComponent },

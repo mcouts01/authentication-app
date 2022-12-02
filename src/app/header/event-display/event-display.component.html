@@ -1,7 +1,7 @@
 <div class="event-container" *ngIf="events$ | async as events" [formGroup]="form">
     <form action="">
         <select class="input" formControlName="event">
-            <option *ngFor="let event of events">{{ event.title }}</option>
+            <option *ngFor="let event of events" [value]="event.eventID">{{ event.title }}</option>
         </select>
     </form>
 </div>

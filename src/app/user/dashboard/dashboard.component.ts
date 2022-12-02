@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { catchError, combineLatest, filter, map, Observable, share, switchMap, tap, throwError, TimeoutError } from 'rxjs';
 import { EventService } from '../../event.service';
-import { UserService } from '../user.service';
 import { DashboardStore } from './dashboard.store';
 import { UserProfileService } from './user-profile/user-profile.service';
 import { UserModel } from './user-profile/user.model';
@@ -28,7 +27,7 @@ export class DashboardComponent implements OnInit {
     private readonly dashboardStore: DashboardStore,
     public auth: AuthService,
     private readonly userProfileService: UserProfileService,
-    private readonly userService: UserService
+    private readonly eventService: EventService,
   ) { }
 
   ngOnInit(): void {

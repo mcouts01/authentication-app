@@ -3,7 +3,6 @@ import { FormGroup } from "@angular/forms";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { Observable, switchMap } from "rxjs";
 import { EventService } from "../../event.service";
-import { UserService } from "../user.service";
 
 export interface Event {
     eventID: number;
@@ -25,8 +24,7 @@ export class DashboardStore extends ComponentStore<DashboardState> {
     readonly events$ = this.select(state => state.events);
 
     constructor(
-        private readonly eventService: EventService,
-        private readonly userService: UserService
+        private readonly eventService: EventService
     ) {
         super({
             events: [],
@@ -35,7 +33,7 @@ export class DashboardStore extends ComponentStore<DashboardState> {
     }
 
     public getSelectedEvent = this.effect((source: Observable<null>) => source.pipe(
-        switchMap(() => this.userService.eventSelected$.pipe(
+        switchMap(() => this.eventService.eventSelected$.pipe(
             tapResponse(
                 (e: Event) => this.updateEvent(e),
                 () => {}
