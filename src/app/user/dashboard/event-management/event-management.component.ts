@@ -11,12 +11,7 @@ import { DashboardStore } from '../dashboard.store';
 })
 export class EventManagementComponent implements OnInit {
 
-  form = new FormGroup({ 
-    title: new FormControl('', [Validators.required, Validators.maxLength(254), Validators.pattern('[a-zA-Z]+')]),
-    description: new FormControl('', [Validators.required, Validators.maxLength(254), Validators.pattern('[a-zA-Z]+')]),
-    start: new FormControl('', [Validators.required]),
-    end: new FormControl('', [Validators.required])
-  });
+  form!: FormGroup;
 
   constructor(
     private readonly eventService: EventService,
@@ -24,6 +19,12 @@ export class EventManagementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.form = new FormGroup({ 
+      title: new FormControl('', [Validators.required, Validators.maxLength(254), Validators.pattern('[a-zA-Z]+')]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(254), Validators.pattern('[a-zA-Z]+')]),
+      start: new FormControl('', [Validators.required]),
+      end: new FormControl('', [Validators.required])
+    });
   }
 
   submit() {
