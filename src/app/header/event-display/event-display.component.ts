@@ -31,11 +31,9 @@ export class EventDisplayComponent implements OnInit {
       event: new FormControl(null)
     });
 
-    this.selectedEvent$.pipe(
-      tap((e: Event) => {
-        this.form.get('event')?.setValue(e.eventID, { emitEvent: false });
-      })
-    ).subscribe();
+    this.selectedEvent$.subscribe((e: Event) => {
+      this.form.get('event')?.setValue(e.eventID, { emitEvent: false });
+    });
 
     this.events$ = this.eventService.getUpcomingEvents();
 
