@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { first, Observable, switchMap, tap } from 'rxjs';
-import { DashboardStore, Event } from 'src/app/user/dashboard/dashboard.store';
+import { DashboardStore, Event } from 'src/app/event-root/dashboard/dashboard.store';
 import { EventService } from 'src/app/event.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

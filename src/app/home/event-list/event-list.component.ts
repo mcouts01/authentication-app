@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EventService } from 'src/app/event.service';
-import { Event } from 'src/app/user/dashboard/dashboard.store';
+import { Event } from 'src/app/event-root/dashboard/dashboard.store';
 
 @Component({
   selector: 'app-event-list',

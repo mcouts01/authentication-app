@@ -6,10 +6,10 @@ import { Event } from './dashboard/dashboard.store';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  templateUrl: './event-root.component.html',
+  styleUrls: ['./event-root.component.scss'],
 })
-export class UserComponent implements OnInit {
+export class EventRootComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
