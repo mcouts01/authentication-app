@@ -18,10 +18,8 @@ export class EventRootComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.pipe(
-      switchMap(params => this.eventService.getEventByID(params['eventID']).pipe(
-        tap((e: Event) => this.eventService.setEvent(e))
-      ))
-    ).subscribe();
+      switchMap((params) => this.eventService.getEventByID(params['eventID']))
+    ).subscribe((e: Event) => this.eventService.setEvent(e));
   }
 
 }
