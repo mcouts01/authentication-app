@@ -19,6 +19,7 @@ import { EventDisplayComponent } from './header/event-display/event-display.comp
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { EventListComponent } from './home/event-list/event-list.component';
+import { EventRegistrationComponent } from './user/event-registration/event-registration.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EventListComponent } from './home/event-list/event-list.component';
     EventDisplayComponent,
     UserComponent,
     HomeComponent,
-    EventListComponent
+    EventListComponent,
+    EventRegistrationComponent
   ],
   imports: [
     BrowserModule,

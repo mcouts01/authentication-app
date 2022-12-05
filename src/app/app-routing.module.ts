@@ -6,6 +6,7 @@ import { UserProfileComponent } from './user/dashboard/user-profile/user-profile
 import { RegisteredGuard } from './registered.guard';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
+import { EventRegistrationComponent } from './user/event-registration/event-registration.component';
 
 const routes: Routes = [
   {
@@ -14,10 +15,15 @@ const routes: Routes = [
   { path: 'event/:eventID', component: UserComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
-      { path: 'register', component: RegistrationComponent },
+      { path: 'register', component: EventRegistrationComponent },
     ]
   },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
+  { 
+    path: 'dashboard', component: DashboardComponent, pathMatch: 'full', canActivate: [RegisteredGuard]
+  },
+  {
+    path: 'register', component: RegistrationComponent, pathMatch: 'full'
+  },
   {
     path: 'home', component: HomeComponent
   }
