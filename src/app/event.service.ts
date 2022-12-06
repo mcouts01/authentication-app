@@ -10,15 +10,7 @@ import { Event } from './event-root/dashboard/dashboard.store';
 export class EventService {
   readonly api = "http://localhost:8080";
 
-  private selectedEventSource = new Subject<Event>();
-
-  selectedEvent$ = this.selectedEventSource.asObservable();
-
   constructor(private readonly http: HttpClient) { }
-
-  setEvent(event: Event) {
-    this.selectedEventSource.next(event);
-  }
 
   getUpcomingEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(encodeURI(`${this.api}/event/upcoming`));

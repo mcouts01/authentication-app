@@ -6,6 +6,7 @@ import { EventService } from '../../event.service';
 import { DashboardStore, Event, UserProfile } from './dashboard.store';
 import { UserProfileService } from './dashboard.service';
 import { UserModel } from './dashboard.store';
+import { EventStore } from 'src/app/event.store';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,12 +22,12 @@ export class DashboardComponent implements OnInit {
   constructor(
     private readonly dashboardStore: DashboardStore,
     public auth: AuthService,
-    private readonly eventService: EventService,
+    private readonly eventStore: EventStore,
   ) { }
 
   ngOnInit(): void {
     this.dashboardStore.getUserProfile(this.auth.user$);
-    this.selectedEvent$ = this.eventService.selectedEvent$;
+    this.selectedEvent$ = this.eventStore.selectedEvent$;
     this.userProfile$ = this.dashboardStore.userProfile$;
   }
 

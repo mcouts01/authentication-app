@@ -5,6 +5,7 @@ import { DashboardStore, Event } from '../../event-root/dashboard/dashboard.stor
 import { EventService } from '../../event.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EventStore } from 'src/app/event.store';
 
 @Component({
   selector: 'app-event-display',
@@ -21,11 +22,12 @@ export class EventDisplayComponent implements OnInit {
   constructor(
     private readonly eventService: EventService,
     public auth: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly eventStore: EventStore
   ) { }
 
   ngOnInit(): void {
-    this.selectedEvent$ = this.eventService.selectedEvent$;
+    this.selectedEvent$ = this.eventStore.selectedEvent$;
 
     this.form = new FormGroup({
       event: new FormControl(null)
