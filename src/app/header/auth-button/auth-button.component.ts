@@ -5,7 +5,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { first, Observable, switchMap, tap } from 'rxjs';
 import { EventService } from '../../event.service';
 import { Event } from '../../user/event-root/dashboard/dashboard.store';
-import { EventStore } from 'src/app/event.store';
+import { EventState, EventStore } from 'src/app/event.store';
 
 @Component({
   selector: 'app-auth-button',
@@ -15,7 +15,7 @@ import { EventStore } from 'src/app/event.store';
 export class AuthButtonComponent implements OnInit {
 
   events$!: Observable<Event[]>;
-  selectedEvent$!: Observable<Event>;
+  selectedEvent$!: Observable<Event | null | undefined>;
 
   constructor(
     @Inject(DOCUMENT) public document: Document, 

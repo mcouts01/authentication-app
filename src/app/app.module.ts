@@ -8,7 +8,6 @@ import { AuthButtonComponent } from './header/auth-button/auth-button.component'
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserProfileService } from './user/event-root/dashboard/dashboard.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { HeaderComponent } from './header/header.component';
@@ -74,7 +73,6 @@ import { EventRootComponent } from './user/event-root/event-root.component';
     })
   ],
   providers: [
-    UserProfileService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

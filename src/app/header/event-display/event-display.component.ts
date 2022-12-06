@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { Observable, tap } from 'rxjs';
-import { DashboardStore, Event } from '../../user/event-root/dashboard/dashboard.store';
+import { asapScheduler, filter, map, Observable, of, subscribeOn, switchMap, takeLast, takeWhile, tap } from 'rxjs';
+import { Event } from '../../user/event-root/dashboard/dashboard.store';
 import { EventService } from '../../event.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,13 +10,12 @@ import { EventStore } from 'src/app/event.store';
 @Component({
   selector: 'app-event-display',
   templateUrl: './event-display.component.html',
-  styleUrls: ['./event-display.component.scss'],
-  providers: [DashboardStore],
+  styleUrls: ['./event-display.component.scss']
 })
 export class EventDisplayComponent implements OnInit {
 
   events$!: Observable<Event[]>;
-  selectedEvent$!: Observable<Event>;
+  selectedEvent$!: Observable<Event | null | undefined>;
   form!: FormGroup;
 
   constructor(
@@ -33,16 +32,17 @@ export class EventDisplayComponent implements OnInit {
       event: new FormControl(null)
     });
 
-    this.selectedEvent$.subscribe((e: Event) => {
-      this.form.get('event')?.setValue(e.eventID, { emitEvent: false });
-    });
-
     this.events$ = this.eventService.getUpcomingEvents();
 
-    this.form.get('event')?.valueChanges.pipe(
-      tap((e: Event) => {
-        this.router.navigate(['/event', e, 'dashboard']);
-      })
+    this.form.get('event')?.valueChanges.subscribe((e: Event) => {
+      this.router.navigate(['/user/event', e, 'dashboard']);
+    });
+
+    this.selectedEvent$.pipe(
+      tap(console.log),
+      filter(e => !!e),
+      tap(e => this.form.get('event')?.setValue(e?.eventID)),
+      takeLast(2)
     ).subscribe();
   }
 }

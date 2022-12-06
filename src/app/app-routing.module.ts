@@ -16,10 +16,10 @@ const routes: Routes = [
   {
     path: 'user', component: UserComponent,
     children: [
-      { path: 'profile', component: UserProfileComponent, canActivate: [RegisteredGuard] },
+      { path: 'profile', component: UserProfileComponent },
       { path: 'event/:eventID', component: EventRootComponent,
         children: [
-          { path: 'dashboard', component: DashboardComponent, canActivate: [RegisteredGuard] },
+          { path: 'dashboard', component: DashboardComponent },
           { path: 'register', component: EventRegistrationComponent },
         ]
       },

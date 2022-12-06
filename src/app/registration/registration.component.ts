@@ -34,7 +34,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   submit() {
-
     this.api.registerUser(this.form).pipe(
       tap({
         next: () => this.router.navigate(['/event', this.route.snapshot.params['eventID'], 'dashboard']),

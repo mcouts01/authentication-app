@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { catchError, combineLatest, filter, Observable, share, switchMap, tap, throwError } from 'rxjs';
-import { UserProfileService } from '../event-root/dashboard/dashboard.service';
-import { DashboardStore, UserModel, UserProfile } from '../event-root/dashboard/dashboard.store';
+import { UserProfile, UserStore } from '../user.store';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,15 +14,12 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private readonly dashboardStore: DashboardStore
+    private readonly userStore: UserStore
   ) { 
   }
 
   ngOnInit(): void {
-    this.userProfile$ = this.dashboardStore.userProfile$;
+    this.userProfile$ = this.userStore.userProfile$;
   }
 }
 
-const isNotUndefined = <T>(value: T | null | undefined): value is T  => {
-  return value != null;
-}

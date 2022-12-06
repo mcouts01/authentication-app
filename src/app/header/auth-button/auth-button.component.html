@@ -2,9 +2,9 @@
     <button class="btn" (click)="auth.logout({ returnTo: document.location.origin })">
         Log out
     </button>
-    <button *ngIf="selectedEvent$ | async as selectedEvent; else defaultdashboard" [routerLink]="['/event', selectedEvent.eventID, 'dashboard']" class="btn">Dashboard</button>
-    <ng-template #defaultdashboard>
-        <button #defaultdashboard class="btn" routerLink="/dashboard">Dashboard</button>
+    <button *ngIf="selectedEvent$ | async as selectedEvent; else profile" [routerLink]="['/user/event', selectedEvent.eventID, 'dashboard']" class="btn">Dashboard</button>
+    <ng-template #profile>
+        <button #profile class="btn" routerLink="/user/profile">Profile</button>
     </ng-template>
 </ng-container>
 
