@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { first, Observable, switchMap, tap } from 'rxjs';
-import { EventService } from 'src/app/event.service';
+import { EventService } from '../../event.service';
 import { Event } from '../../event-root/dashboard/dashboard.store';
 
 @Component({
