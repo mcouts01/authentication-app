@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { AuthService, User } from "@auth0/auth0-angular";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { Observable, switchMap } from "rxjs";
+import { combineLatest, combineLatestWith, map, Observable, switchMap, tap, throwError } from "rxjs";
 import { EventService } from "../../event.service";
+import { UserProfileService } from "./dashboard.service";
 
 export interface Event {
     eventID: number;
@@ -14,32 +16,45 @@ export interface Event {
 
 export interface DashboardState {
     events: Event[];
-    selectedEvent: Event | null | undefined;
+    userProfile: UserProfile;
+}
+
+export interface UserProfile {
+    user: User | null | undefined,
+    profile: UserModel | null | undefined
+}
+
+export interface UserModel {
+    userId: number;
+    authId: string;
+    firstName: string;
+    lastName: string;
 }
 
 @Injectable()
 export class DashboardStore extends ComponentStore<DashboardState> {
 
-    readonly selectedEvent$ = this.select(state => state.selectedEvent);
     readonly events$ = this.select(state => state.events);
+    readonly userProfile$ = this.select(state => state.userProfile);
 
     constructor(
-        private readonly eventService: EventService
+        private readonly eventService: EventService,
+        private readonly authService: AuthService,
+        private readonly userProfileService: UserProfileService
     ) {
         super({
             events: [],
-            selectedEvent: null
+            userProfile: {} as UserProfile
         });
     }
 
-    public getSelectedEvent = this.effect((source: Observable<null>) => source.pipe(
-        switchMap(() => this.eventService.eventSelected$.pipe(
-            tapResponse(
-                (e: Event) => this.updateEvent(e),
-                () => {}
-            )
-        ))
-    ));
+    public getUserProfile = this.effect((source: Observable<User>) => source.pipe(
+        switchMap(user => this.userProfileService.getUserProfile(user?.sub)),
+        combineLatestWith(this.authService.user$),
+        tapResponse(([profile, user]) => {
+            this.updateUserProfile({user, profile});
+        }, () => {}))
+    );
 
     public getEvents = this.effect((source: Observable<null>) => source.pipe(
         switchMap(() => this.eventService.getUpcomingEvents()),
@@ -57,18 +72,18 @@ export class DashboardStore extends ComponentStore<DashboardState> {
             }, () => {}))
     );
 
-    readonly updateEvent = this.updater((state, newEvent: Event) => {
-        return {
-            ...state,
-            selectedEvent: newEvent
-        };
-    });
-
     readonly updateEvents = this.updater((state, newEvents: Event[]) => {
         return {
             ...state,
             events: newEvents
         };
+    });
+
+    readonly updateUserProfile = this.updater((state, newUserProfile: UserProfile) => {
+        return {
+            ...state,
+            userProfile: newUserProfile
+        }
     });
 
     readonly addEvent = this.updater((state, newEvent: Event) => {

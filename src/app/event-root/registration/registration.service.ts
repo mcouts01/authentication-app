@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
-import { UserModel } from "../dashboard/user-profile/user.model";
+import { UserModel } from "../dashboard/dashboard.store";
 
 @Injectable({
     providedIn: 'root'

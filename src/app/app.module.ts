@@ -8,7 +8,7 @@ import { AuthButtonComponent } from './header/auth-button/auth-button.component'
 import { UserProfileComponent } from './event-root/dashboard/user-profile/user-profile.component';
 import { RegistrationComponent } from './event-root/registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserProfileService } from './event-root/dashboard/user-profile/user-profile.service';
+import { UserProfileService } from './event-root/dashboard/dashboard.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { HeaderComponent } from './header/header.component';

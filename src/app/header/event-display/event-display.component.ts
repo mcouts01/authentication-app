@@ -25,7 +25,7 @@ export class EventDisplayComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.selectedEvent$ = this.eventService.eventSelected$;
+    this.selectedEvent$ = this.eventService.selectedEvent$;
 
     this.form = new FormGroup({
       event: new FormControl(null)

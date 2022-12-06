@@ -1,6 +1,6 @@
 <div *ngIf="userProfile$ | async as user" class="dashboard-container">
     <div class="dashboard-header">
-        <h1>Hello, {{ user.profile.firstName }}</h1>
+        <h1>Hello, {{ user.profile?.firstName }}</h1>
     </div>
     <div *ngIf="selectedEvent$ | async as selectedEvent; else noevent">
         <h3>You are viewing data for {{ selectedEvent.title }}</h3>

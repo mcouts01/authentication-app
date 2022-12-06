@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, shareReplay, tap } from "rxjs";
-import { UserModel } from "./user.model";
+import { UserModel } from "./dashboard.store";
 
 @Injectable({
     providedIn: 'root'

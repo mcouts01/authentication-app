@@ -26,6 +26,6 @@ export class AuthButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.events$ = this.eventService.getUpcomingEvents();
-    this.selectedEvent$ = this.eventService.eventSelected$;
+    this.selectedEvent$ = this.eventService.selectedEvent$;
   }
 }
