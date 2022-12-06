@@ -5,21 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './header/auth-button/auth-button.component';
-import { UserProfileComponent } from './event-root/dashboard/user-profile/user-profile.component';
-import { RegistrationComponent } from './event-root/registration/registration.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserProfileService } from './event-root/dashboard/dashboard.service';
+import { UserProfileService } from './user/event-root/dashboard/dashboard.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { HeaderComponent } from './header/header.component';
-import { DashboardComponent } from './event-root/dashboard/dashboard.component';
-import { TeamManagementComponent } from './event-root/dashboard/team-management/team-management.component';
-import { EventManagementComponent } from './event-root/dashboard/event-management/event-management.component';
+import { DashboardComponent } from './user/event-root/dashboard/dashboard.component';
+import { TeamManagementComponent } from './user/event-root/dashboard/team-management/team-management.component';
+import { EventManagementComponent } from './user/event-root/dashboard/event-management/event-management.component';
 import { EventDisplayComponent } from './header/event-display/event-display.component';
-import { EventRootComponent } from './event-root/event-root.component';
+import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { EventListComponent } from './home/event-list/event-list.component';
-import { EventRegistrationComponent } from './event-root/event-registration/event-registration.component';
+import { EventRegistrationComponent } from './user/event-root/event-registration/event-registration.component';
+import { EventRootComponent } from './user/event-root/event-root.component';
 
 @NgModule({
   declarations: [
@@ -32,10 +33,11 @@ import { EventRegistrationComponent } from './event-root/event-registration/even
     TeamManagementComponent,
     EventManagementComponent,
     EventDisplayComponent,
-    EventRootComponent,
+    UserComponent,
     HomeComponent,
     EventListComponent,
-    EventRegistrationComponent
+    EventRegistrationComponent,
+    EventRootComponent
   ],
   imports: [
     BrowserModule,

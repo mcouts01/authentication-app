@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject, tap } from 'rxjs';
-import { Event } from './event-root/dashboard/dashboard.store';
+import { Event } from './user/event-root/dashboard/dashboard.store';
 
 @Injectable({
   providedIn: 'root'

@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs';
 import { EventService } from '../event.service';
 import { EventStore } from '../event.store';
-import { Event } from './dashboard/dashboard.store';
+import { Event } from './event-root/dashboard/dashboard.store';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './event-root.component.html',
-  styleUrls: ['./event-root.component.scss'],
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
 })
-export class EventRootComponent implements OnInit {
+export class UserComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,

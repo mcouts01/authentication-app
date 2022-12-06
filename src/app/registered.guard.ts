@@ -3,7 +3,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapsho
 import { catchError, combineLatestWith, map, Observable, of, switchMap, tap } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
-import { UserProfileService } from './event-root/dashboard/dashboard.service';
+import { UserProfileService } from './user/event-root/dashboard/dashboard.service';
 import { EventService } from './event.service';
 
 @Injectable({

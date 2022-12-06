@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { AuthService, User } from "@auth0/auth0-angular";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { combineLatest, combineLatestWith, map, Observable, switchMap, tap, throwError } from "rxjs";
-import { EventService } from "../../event.service";
+import { EventService } from "../../../event.service";
 import { UserProfileService } from "./dashboard.service";
 
 export interface Event {

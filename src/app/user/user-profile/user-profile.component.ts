@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { catchError, combineLatest, filter, Observable, share, switchMap, tap, throwError } from 'rxjs';
-import { UserProfileService } from '../dashboard.service';
-import { DashboardStore, UserModel, UserProfile } from '../dashboard.store';
+import { UserProfileService } from '../event-root/dashboard/dashboard.service';
+import { DashboardStore, UserModel, UserProfile } from '../event-root/dashboard/dashboard.store';
 
 @Component({
   selector: 'app-user-profile',

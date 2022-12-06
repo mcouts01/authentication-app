@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { User } from '@auth0/auth0-angular';
 
-import { EventRootComponent } from './event-root.component';
+import { UserComponent } from './user.component';
 
 describe('UserComponent', () => {
-  let component: EventRootComponent;
-  let fixture: ComponentFixture<EventRootComponent>;
+  let component: UserComponent;
+  let fixture: ComponentFixture<UserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EventRootComponent ]
+      declarations: [ UserComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EventRootComponent);
+    fixture = TestBed.createComponent(UserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

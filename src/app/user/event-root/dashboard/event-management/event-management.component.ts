@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
-import { EventService } from '../../../event.service';
+import { EventService } from '../../../../event.service';
 import { DashboardStore } from '../dashboard.store';
 
 @Component({
