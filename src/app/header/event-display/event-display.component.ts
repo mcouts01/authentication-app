@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { asapScheduler, filter, map, Observable, of, subscribeOn, switchMap, takeLast, takeWhile, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { Event } from '../../user/event-root/dashboard/dashboard.store';
 import { EventService } from '../../event.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -38,11 +38,8 @@ export class EventDisplayComponent implements OnInit {
       this.router.navigate(['/user/event', e, 'dashboard']);
     });
 
-    this.selectedEvent$.pipe(
-      tap(console.log),
-      filter(e => !!e),
-      tap(e => this.form.get('event')?.setValue(e?.eventID)),
-      takeLast(2)
-    ).subscribe();
+    this.selectedEvent$.subscribe(e => {
+      this.form.get('event')?.setValue(e?.eventID, { emitEvent: false });
+    });
   }
 }

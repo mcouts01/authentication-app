@@ -11,7 +11,7 @@ import { UserStore } from './user.store';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  providers: [ UserStore ]
+  providers: [ UserStore ] 
 })
 export class UserComponent implements OnInit {
 

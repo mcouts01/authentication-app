@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { Observable, Subject, switchMap, tap } from "rxjs";
+import { Observable, share, Subject, switchMap, tap } from "rxjs";
 import { EventService } from "./event.service";
 import { Event } from "./user/event-root/dashboard/dashboard.store";
 
@@ -8,7 +8,9 @@ export interface EventState {
     selectedEvent: Event | null | undefined;
 }
 
-@Injectable()
+@Injectable({
+    providedIn: "root"
+})
 export class EventStore extends ComponentStore<EventState> {
     selectedEvent$ = this.select(state => state.selectedEvent);
 

@@ -4,5 +4,4 @@
             <option *ngFor="let event of events" [value]="event.eventID">{{ event.title }}</option>
         </select>
     </form>
-    <div *ngIf="selectedEvent$ | async as selectedEvent">{{ selectedEvent.eventID }}</div>
 </div>

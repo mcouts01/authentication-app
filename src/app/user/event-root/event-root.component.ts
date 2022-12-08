@@ -5,8 +5,7 @@ import { EventStore } from 'src/app/event.store';
 @Component({
   selector: 'app-event-root',
   templateUrl: './event-root.component.html',
-  styleUrls: ['./event-root.component.scss'],
-  providers: [ EventStore ]
+  styleUrls: ['./event-root.component.scss']
 })
 export class EventRootComponent implements OnInit {
 
