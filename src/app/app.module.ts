@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './header/auth-button/auth-button.component';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserProfileComponent } from './user/profile/user-profile/user-profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -13,13 +13,14 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './user/event-root/dashboard/dashboard.component';
 import { TeamManagementComponent } from './user/event-root/dashboard/team-management/team-management.component';
-import { EventManagementComponent } from './user/event-root/dashboard/event-management/event-management.component';
+import { EventManagementComponent } from './user/profile/event-management/event-management.component';
 import { EventDisplayComponent } from './header/event-display/event-display.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { EventListComponent } from './home/event-list/event-list.component';
 import { EventRegistrationComponent } from './user/event-root/event-registration/event-registration.component';
 import { EventRootComponent } from './user/event-root/event-root.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EventRootComponent } from './user/event-root/event-root.component';
     HomeComponent,
     EventListComponent,
     EventRegistrationComponent,
-    EventRootComponent
+    EventRootComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

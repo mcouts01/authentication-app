@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { catchError, combineLatest, filter, Observable, share, switchMap, tap, throwError } from 'rxjs';
-import { UserProfile, UserStore } from '../user.store';
+import { UserProfile, UserStore } from '../../user.store';
 
 @Component({
   selector: 'app-user-profile',

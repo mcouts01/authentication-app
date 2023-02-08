@@ -35,5 +35,4 @@ export class EventStore extends ComponentStore<EventState> {
             selectedEvent: newEvent
         };
     });
-
 }

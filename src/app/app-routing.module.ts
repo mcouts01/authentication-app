@@ -6,8 +6,8 @@ import { RegisteredGuard } from './registered.guard';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { EventRegistrationComponent } from './user/event-root/event-registration/event-registration.component';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { EventRootComponent } from './user/event-root/event-root.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'user', component: UserComponent,
     children: [
-      { path: 'profile', component: UserProfileComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: 'event/:eventID', component: EventRootComponent,
         children: [
           { path: 'dashboard', component: DashboardComponent },

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { tap } from 'rxjs';
-import { EventService } from '../../../../event.service';
-import { DashboardStore } from '../dashboard.store';
+import { EventService } from '../../../event.service';
 
 @Component({
   selector: 'app-event-management',
@@ -14,8 +12,7 @@ export class EventManagementComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
-    private readonly eventService: EventService,
-    private readonly dashboardStore: DashboardStore
+    private readonly eventService: EventService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +25,6 @@ export class EventManagementComponent implements OnInit {
   }
 
   submit() {
-    this.dashboardStore.createEvent(this.form);
+    this.eventService.createEvent(this.form);
   }
 }
