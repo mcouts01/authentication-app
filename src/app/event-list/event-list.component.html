@@ -1,0 +1,26 @@
+<div class="content-container">
+    <div *ngFor="let event of eventList$ | async" class="event-card">
+        <div class="group">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.description }}</p>
+        </div>
+        <div class="group">
+            <p>Starts</p>
+            <h3>{{ event.start }}</h3>
+            <button (click)="register(event)">Register</button>
+        </div>
+    </div>
+</div>
+<div class="content-container">
+    <div *ngFor="let event of registeredEvents$ | async" class="event-card">
+        <div class="group">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.description }}</p>
+        </div>
+        <div class="group">
+            <p>Starts</p>
+            <h3>{{ event.start }}</h3>
+            <button (click)="register(event)">Register</button>
+        </div>
+    </div>
+</div>

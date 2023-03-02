@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
-import { UserModel } from "../user/user.store";
+import { UserModel } from "../user.store";
 
 @Injectable({
     providedIn: 'root'

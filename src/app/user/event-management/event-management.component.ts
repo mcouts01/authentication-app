@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EventService } from '../../../event.service';
+import { EventService } from '../../event.service';
 
 @Component({
   selector: 'app-event-management',
@@ -25,6 +25,7 @@ export class EventManagementComponent implements OnInit {
   }
 
   submit() {
-    this.eventService.createEvent(this.form);
+    console.log('submitting');
+    this.eventService.createEvent(this.form.value);
   }
 }
