@@ -15,7 +15,9 @@ export class EventRootComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => this.eventStore.setEventFromID(params['eventID']));
+    this.route.params.subscribe((params) => {
+      this.eventStore.setEventFromID(params['eventID']);
+    });
   }
 
 }

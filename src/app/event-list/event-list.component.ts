@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { EventStore } from 'src/app/event.store';
 import { Event } from '../user/event-root/dashboard/dashboard.store';
 
@@ -16,7 +17,8 @@ export class EventListComponent implements OnInit {
 
   constructor(
     private readonly eventStore: EventStore,
-    private readonly auth: AuthService
+    private readonly auth: AuthService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,10 @@ export class EventListComponent implements OnInit {
     this.auth.getAccessTokenSilently({ scope: `participant:${event.eventID}`}).subscribe((response) => {
       console.log(response);
     });
+  }
+
+  goToDashboard(event: Event): void {
+    this.router.navigateByUrl(`/user/event/${event.eventID}/dashboard`);
   }
 
 }

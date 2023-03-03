@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DashboardStore, Event } from './dashboard.store';
 import { EventStore } from 'src/app/event.store';
 import { UserProfile, UserStore } from '../../user.store';
+import { EventService } from 'src/app/event.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,10 +21,12 @@ export class DashboardComponent implements OnInit {
     private readonly userStore: UserStore,
     public auth: AuthService,
     private readonly eventStore: EventStore,
+    private readonly eventService: EventService
   ) { }
 
   ngOnInit(): void {
     this.selectedEvent$ = this.eventStore.selectedEvent$;
     this.userProfile$ = this.userStore.userProfile$;
+    this.eventService.getEventByID(14).subscribe();
   }
 }

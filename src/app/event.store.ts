@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AuthService } from "@auth0/auth0-angular";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { combineLatest, Observable, share, Subject, switchMap, take, tap } from "rxjs";
+import { combineLatest, map, Observable, share, Subject, switchMap, take, tap } from "rxjs";
 import { EventService } from "./event.service";
 import { Event } from "./user/event-root/dashboard/dashboard.store";
 
@@ -30,10 +30,15 @@ export class EventStore extends ComponentStore<EventState> {
         });
     }
 
-    readonly setEventFromID = this.effect((source: Observable<number>) => source.pipe(
-        switchMap((id) => this.eventService.getEventByID(id)),
-        tapResponse((event) => {
-            this.setEvent(event);
+    readonly setEventFromID = this.effect((source: Observable<string>) => source.pipe(
+        switchMap((id) => this.registeredEvents$.pipe(
+            take(1),
+            map((events: Event[]) => events.find(event => event.eventID === Number.parseInt(id))),
+        )),
+        tapResponse((event: Event | undefined) => {
+            if(event !== undefined) {
+                this.setEvent(event);
+            }
         }, () => {})
     ));
 
@@ -41,13 +46,8 @@ export class EventStore extends ComponentStore<EventState> {
         tap(() => {
             combineLatest([this.eventService.getUpcomingEvents(), this.auth.user$.pipe(take(1))]).subscribe(
                 ([eventList, user]) => {
-                    user?.['https://www.auth-app.com/participant']?.forEach((eventID: string) => {
-                        console.log(eventID);
-                        eventList.filter(e => (e.eventID === Number.parseInt(eventID)))
-                            .forEach((e) => this.addRegisteredEvent(e));
-                        eventList.filter(e => !(e.eventID === Number.parseInt(eventID)))
-                            .forEach((e) => this.addEvent(e));
-                    });
+                    this.setRegisteredEvents(eventList.filter(event => user?.['https://www.auth-app.com/participant'].includes(`${event.eventID}`)));
+                    this.setEventList(eventList.filter(event => !user?.['https://www.auth-app.com/participant'].includes(`${event.eventID}`)));
                 }
             )
         })
