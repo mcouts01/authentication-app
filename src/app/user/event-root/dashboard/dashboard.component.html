@@ -1,16 +1,19 @@
 <div *ngIf="userProfile$ | async as user" class="dashboard-container">
     <div class="dashboard-header">
-        <h1>Hello, {{ user.profile.firstName }}</h1>
+        <h1>Hello, {{ user.profile?.firstName }}</h1>
     </div>
+    <div *ngIf="selectedEvent$ | async as selectedEvent; else noevent">
+        <h3>You are viewing data for {{ selectedEvent.title }}</h3>
+    </div>
+    <ng-template #noevent>
+        <h3>You are not viewing any event data</h3>
+    </ng-template>
     <div class="dashboard-content">
         <div class="user-profile-container dashboard-tile">
             <app-user-profile></app-user-profile>
         </div>
         <div class="team-management-container dashboard-tile">
             <app-team-management></app-team-management>
-        </div>
-        <div class="event-list-container dashboard-tile">
-            <app-event-management></app-event-management>
         </div>
     </div>
 </div>

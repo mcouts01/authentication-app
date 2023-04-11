@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { AuthService, User } from "@auth0/auth0-angular";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { Observable, switchMap } from "rxjs";
-import { EventService } from "../../event.service";
+import { combineLatest, combineLatestWith, map, Observable, switchMap, tap, throwError } from "rxjs";
+import { EventService } from "../../../event.service";
 
 export interface Event {
-    id: number;
+    eventID: number;
     start: Date;
     end: Date;
     title: string;
@@ -14,19 +15,18 @@ export interface Event {
 
 export interface DashboardState {
     events: Event[];
-    selectedEvent: Event | null | undefined;
 }
 
 @Injectable()
 export class DashboardStore extends ComponentStore<DashboardState> {
 
-    readonly selectedEvent$ = this.select(state => state.selectedEvent);
     readonly events$ = this.select(state => state.events);
 
-    constructor(private readonly eventService: EventService) {
+    constructor(
+        private readonly eventService: EventService
+    ) {
         super({
-            events: [],
-            selectedEvent: null
+            events: []
         });
     }
 
@@ -34,7 +34,6 @@ export class DashboardStore extends ComponentStore<DashboardState> {
         switchMap(() => this.eventService.getUpcomingEvents()),
         tapResponse(
             (events) => {
-                console.log(events);
                 this.updateEvents(events);
             }, () => {})
     ));
@@ -45,13 +44,6 @@ export class DashboardStore extends ComponentStore<DashboardState> {
                 this.addEvent(response);
             }, () => {}))
     );
-
-    readonly updateEvent = this.updater((state, newEvent: Event) => {
-        return {
-            ...state,
-            selectedEvent: newEvent
-        };
-    });
 
     readonly updateEvents = this.updater((state, newEvents: Event[]) => {
         return {

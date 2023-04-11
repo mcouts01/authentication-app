@@ -1,16 +1,22 @@
-import { TestBed } from '@angular/core/testing';
-
 import { EventService } from './event.service';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 describe('EventService', () => {
+  let httpSpy: jasmine.SpyObj<HttpClient>;
   let service: EventService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(EventService);
+    httpSpy = jasmine.createSpyObj<HttpClient>('httpSpy', ['get', 'post'])
+    service = new EventService(httpSpy);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('getUpcomingEvents hits upcoming endpoint', (done) => {
+    httpSpy.get.and.returnValue(of([]));
+    service.getUpcomingEvents().subscribe((events) => {
+      expect(events).toEqual([]);
+      expect(httpSpy.get).toHaveBeenCalledWith('http://localhost:8080/event/upcoming');
+      done();
+    });
   });
 });

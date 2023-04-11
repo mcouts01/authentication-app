@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { tap } from 'rxjs';
-import { UserModel } from '../dashboard/user-profile/user.model';
 import { RegistrationService } from './registration.service';
 
 @Component({
@@ -23,7 +22,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private readonly api: RegistrationService,
     public auth: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
     ) {}
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
   submit() {
     this.api.registerUser(this.form).pipe(
       tap({
-        next: () => this.router.navigateByUrl('/user/dashboard'),
+        next: () => this.router.navigate(['/event', this.route.snapshot.params['eventID'], 'dashboard']),
         error: error => console.log(error)})
     ).subscribe();
   }
